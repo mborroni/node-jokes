@@ -12,7 +12,7 @@ const onEmptyResponse = () => {
 const saveOnFile = joke => {
   const fileStream = fs.createWriteStream('jokes.txt', { flags: 'a' }, () => {
     fileStream.on('error', err => {
-      console.log('error saving joke');
+      console.error('error saving joke');
       throw err;
     });
   });
