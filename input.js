@@ -15,5 +15,3 @@ const getKeyword = callback => {
 };
 
 module.exports = { getKeyword };
-
-setKeyword(searchJokes);
