@@ -1,5 +1,4 @@
 const prompt = require('prompt');
-const { searchJokes } = require('./api');
 
 const keywordSchema = {
   properties: {
@@ -16,3 +15,5 @@ const getKeyword = callback => {
 };
 
 module.exports = { getKeyword };
+
+setKeyword(searchJokes);
