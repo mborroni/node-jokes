@@ -9,6 +9,10 @@ const onEmptyResponse = () => {
   console.log(chalk.red('Acá no hacemos chistes con esas cosas.'));
 };
 
+const parseJokes = resultJokes => {
+  return resultJokes.map(aJoke => aJoke.joke);
+};
+
 const saveOnFile = joke => {
   const fileStream = fs.createWriteStream('jokes.txt', { flags: 'a' }, () => {
     fileStream.on('error', err => {
@@ -20,4 +24,4 @@ const saveOnFile = joke => {
   fileStream.end('\n\n');
 };
 
-module.exports = { onReponse, onEmptyResponse, saveOnFile };
+module.exports = { onReponse, onEmptyResponse, parseJokes, saveOnFile };
