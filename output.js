@@ -17,7 +17,7 @@ const saveOnFile = joke => {
     });
   });
   fileStream.write(joke);
-  fileStream.end('\n');
+  fileStream.end('\n\n');
 };
 
 module.exports = { onReponse, onEmptyResponse, saveOnFile };
