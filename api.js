@@ -27,5 +27,3 @@ const searchJokes = keyword => {
 };
 
 module.exports = searchJokes;
-
-searchJokes('hello');
