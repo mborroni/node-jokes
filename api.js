@@ -7,7 +7,8 @@ const options = {
 };
 
 const returnJokes = data => {
-  return JSON.parse(data.results);
+  const parsedJson = JSON.parse(data);
+  return parsedJson.results;
 };
 
 const searchJokes = keyword => {
@@ -26,3 +27,5 @@ const searchJokes = keyword => {
 };
 
 module.exports = searchJokes;
+
+searchJokes('hello');
