@@ -26,4 +26,4 @@ const searchJokes = keyword => {
   );
 };
 
-module.exports = searchJokes;
+module.exports = { searchJokes };
