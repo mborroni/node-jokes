@@ -20,4 +20,4 @@ const saveOnFile = joke => {
   fileStream.end('\n');
 };
 
-module.exports = { onReponse, onEmptyResponse };
+module.exports = { onReponse, onEmptyResponse, saveOnFile };
