@@ -1,4 +1,5 @@
 const https = require('https');
+const { parseJokes, saveOnFile, jokeNotFound, jokeFound } = require('./output');
 
 const options = {
   headers: {
@@ -7,8 +8,16 @@ const options = {
 };
 
 const returnJokes = data => {
-  const parsedJson = JSON.parse(data);
-  return parsedJson.results;
+  const jokes = JSON.parse(data);
+  const parsedJokes = parseJokes(jokes.results);
+  if (!parsedJokes.length) {
+    jokeNotFound();
+    return;
+  }
+  parsedJokes.forEach(joke => {
+    saveOnFile(joke);
+    jokeFound(joke);
+  });
 };
 
 const searchJokes = keyword => {

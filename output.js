@@ -1,11 +1,11 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const onReponse = joke => {
+const jokeFound = joke => {
   console.log(chalk.green(joke));
 };
 
-const onEmptyResponse = () => {
+const jokeNotFound = () => {
   console.log(chalk.red('Acá no hacemos chistes con esas cosas.'));
 };
 
@@ -20,8 +20,8 @@ const saveOnFile = joke => {
       throw err;
     });
   });
-  fileStream.write(joke);
-  fileStream.end('\n\n');
+  fileStream.write(joke + '\n\n');
+  fileStream.end();
 };
 
-module.exports = { onReponse, onEmptyResponse, parseJokes, saveOnFile };
+module.exports = { jokeFound, jokeNotFound, parseJokes, saveOnFile };
