@@ -1,15 +1,9 @@
-const https = require('https');
+const request = require('request');
 const { parseJokes, saveOnFile, jokeNotFound, jokeFound } = require('./output');
 
-const options = {
-  headers: {
-    Accept: 'application/json'
-  }
-};
-
-const returnJokes = data => {
-  const jokes = JSON.parse(data);
-  const parsedJokes = parseJokes(jokes.results);
+const returnJokes = (err, response, body) => {
+  const json = JSON.parse(body);
+  const parsedJokes = parseJokes(json.results);
   if (!parsedJokes.length) {
     jokeNotFound();
     return;
@@ -21,18 +15,13 @@ const returnJokes = data => {
 };
 
 const searchJokes = keyword => {
-  https.get(
-    `https://icanhazdadjoke.com/search?term=${keyword}`,
-    options,
-    response => {
-      response.on('error', err => {
-        console.error(err);
-        throw err;
-      });
-
-      response.on('data', returnJokes);
+  const options = {
+    url: `https://icanhazdadjoke.com/search?term=${keyword}`,
+    headers: {
+      Accept: 'application/json'
     }
-  );
+  };
+  request(options, returnJokes);
 };
 
 module.exports = { searchJokes };

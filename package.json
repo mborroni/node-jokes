@@ -19,6 +19,7 @@
   "homepage": "https://github.com/mborroni/node-jokes#readme",
   "dependencies": {
     "chalk": "^3.0.0",
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "request": "^2.88.0"
   }
 }
