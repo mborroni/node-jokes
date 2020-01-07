@@ -1,4 +1,4 @@
 const { getKeyword } = require('./input');
-const { searchJokes } = require('./api');
+const { jokesController } = require('./api');
 
-getKeyword(searchJokes);
+getKeyword(jokesController);

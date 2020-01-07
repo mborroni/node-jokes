@@ -1,4 +1,5 @@
 const request = require('request');
+const { getMostPopularJoke } = require('./leaderboard');
 const { parseJokes, saveOnFile, jokeNotFound, jokeFound } = require('./output');
 
 const returnJokes = (err, response, body) => {
@@ -24,4 +25,13 @@ const searchJokes = keyword => {
   request(options, returnJokes);
 };
 
-module.exports = { searchJokes };
+const jokesController = input => {
+  if (input === 'leaderboard') {
+    getMostPopularJoke();
+    return;
+  }
+
+  searchJokes(input);
+};
+
+module.exports = { jokesController };

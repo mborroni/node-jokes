@@ -9,6 +9,11 @@ const jokeNotFound = () => {
   console.log(chalk.red('Acá no hacemos chistes con esas cosas.'));
 };
 
+const printMostPopularJoke = joke => {
+  console.log(joke);
+  console.log(chalk.blue('#ElMásPopular'));
+};
+
 const parseJokes = resultJokes => {
   return resultJokes.map(aJoke => aJoke.joke);
 };
@@ -24,4 +29,10 @@ const saveOnFile = joke => {
   fileStream.end();
 };
 
-module.exports = { jokeFound, jokeNotFound, parseJokes, saveOnFile };
+module.exports = {
+  jokeFound,
+  jokeNotFound,
+  printMostPopularJoke,
+  parseJokes,
+  saveOnFile
+};
