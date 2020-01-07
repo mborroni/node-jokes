@@ -16,6 +16,9 @@ const getMostPopularJoke = () => {
 
     randomIndex = getRandomIndex(jokesMap.size);
     printMostPopularJoke([...jokesMap.keys()][randomIndex]);
+
+    //const mostPopularJoke = [...jokesMap.entries()]; //todo: find max value
+    //printMostPopularJoke(mostPopularJoke);
   });
 };
 
