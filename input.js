@@ -9,7 +9,7 @@ const keywordSchema = {
   }
 };
 
-const getKeyword = callback => {
+function getKeyword(callback) {
   prompt.get(keywordSchema, (err, res) => {
     if (err) {
       console.error(err);
@@ -18,6 +18,6 @@ const getKeyword = callback => {
 
     callback(res.keyword);
   });
-};
+}
 
 module.exports = { getKeyword };

@@ -1,7 +1,7 @@
 const request = require('request');
 const { parseJokes, saveOnFile, jokeNotFound, jokeFound } = require('./output');
 
-const returnJokes = (err, response, body) => {
+function _returnJokes(err, response, body) {
   const json = JSON.parse(body);
   const parsedJokes = parseJokes(json.results);
   if (!parsedJokes.length) {
@@ -12,16 +12,16 @@ const returnJokes = (err, response, body) => {
     saveOnFile(joke);
     jokeFound(joke);
   });
-};
+}
 
-const searchJokes = keyword => {
+function searchJokes(keyword) {
   const options = {
     url: `https://icanhazdadjoke.com/search?term=${keyword}`,
     headers: {
       Accept: 'application/json'
     }
   };
-  request(options, returnJokes);
-};
+  request(options, _returnJokes);
+}
 
 module.exports = { searchJokes };
