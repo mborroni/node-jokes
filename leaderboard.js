@@ -7,12 +7,12 @@ function getMostPopularJoke() {
 
     const jokesCounter = _countJokes(jokes);
 
-    if (_mostPopularJokeExists(jokesCounter)) {
-      const joke = _getJoke(jokesCounter);
-      printMostPopularJoke(joke);
+    const joke = _filterMostPopularJoke(jokesCounter);
+    if (joke === null) {
+      const randomJoke = _getRandomJoke(jokesCounter);
+      printMostPopularJoke(randomJoke);
       return;
     }
-    const joke = _getRandomJoke(jokesCounter);
     printMostPopularJoke(joke);
     return;
   });
@@ -33,25 +33,20 @@ function _countJokes(jokes) {
   return jokesMap;
 }
 
-function _mostPopularJokeExists(jokes) {
+function _filterMostPopularJoke(jokes) {
   const majorNumberOfOccurrences = Math.max.apply(null, [...jokes.values()]);
-  const totalOccurrences = [...jokes.values()].filter(
-    counter => counter === majorNumberOfOccurrences
-  ).length;
-  if (totalOccurrences > 1) {
-    return false;
+
+  const filteredJokes = [...jokes.entries()].filter(joke => {
+    const [, counter] = joke;
+    return counter === majorNumberOfOccurrences;
+  });
+
+  if (filteredJokes.length > 1) {
+    return null;
   }
-  return true;
-}
 
-function _getJoke(jokes) {
-  const sortedJokes = _sortJokes([...jokes]);
-  const [joke] = sortedJokes[0];
+  const [joke] = filteredJokes[0];
   return joke;
-}
-
-function _sortJokes(array) {
-  return array.sort((elementA, elementB) => elementB[1] - elementA[1]);
 }
 
 function _getRandomJoke(jokes) {
