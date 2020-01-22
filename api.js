@@ -1,17 +1,25 @@
 const request = require('request');
 const { parseJokes, saveOnFile, jokeNotFound, jokeFound } = require('./output');
 
+const STATUS_OK = 200;
+
 function _returnJokes(err, response, body) {
-  const json = JSON.parse(body);
-  const parsedJokes = parseJokes(json.results);
-  if (!parsedJokes.length) {
-    jokeNotFound();
-    return;
+  if (err) {
+    console.error(err);
+    throw err;
   }
-  parsedJokes.forEach(joke => {
-    saveOnFile(joke);
-    jokeFound(joke);
-  });
+  if (response.statusCode === STATUS_OK) {
+    const json = JSON.parse(body);
+    const parsedJokes = parseJokes(json.results);
+    if (!parsedJokes.length) {
+      jokeNotFound();
+      return;
+    }
+    parsedJokes.forEach(joke => {
+      saveOnFile(joke);
+      jokeFound(joke);
+    });
+  }
 }
 
 function searchJokes(keyword) {
